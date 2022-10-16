@@ -1,0 +1,9 @@
+name: GagarinPeter
+main: gagarin.GagarinPeter
+version: 1.0
+loadbefore: [Citizens]
+depend: [WorldGuard]
+api-version: 1.13
+commands:
+  gagarin:
+    usage: /gagarin

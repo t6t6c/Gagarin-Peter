@@ -1,0 +1,365 @@
+# Устанавливает привязку к слоту в хотбаре. Магический предмет можно будет использовать только в этом слоте.
+# Иначе, он не будет считаться магическим (его можно будет выкинуть, бить сущностей и т.д.).
+# Нумерация слотов в хотбаре начинается с нуля (т.е. 1-ый слот хотбара будет иметь номер 0, 2-ой - 1 и т.д.).
+# Поставьте значение 'false', чтобы отключить привязку по слоту.
+linking_to_slot: false
+# Устанавливает привязку к материалу предмета. Магический предмет может иметь только этот материал.
+# Поставьте значние 'false', чтобы отключить привязку по материалу.
+linking_to_material: BLAZE_ROD
+# Устанавливает привязку к первой строчки описания предмета (лора).
+# Поставьте значение 'false', чтобы отключить привязку по лору.
+linking_to_lore: '***___**'
+# §n - for color, when 'n' - number of color. 
+magic_item:
+    # Name of the magic item
+    name: '§e§lВолшебная палочка'
+    # Lore of the magic item
+    lore: 
+        - 'ПКМ - использование на себя (если возможно).'
+        - 'ЛКМ - использование на другую сущность (если возможно).'
+        - 'Дроп предмета (стандартно клавишей Q)'
+        - 'откроет меню выбора доступных заклинаний.'
+        - 'В этом же меню можно настроить бинд клавиш заклинаний'
+        - 'Присесть + дропнуть предмет (стандартно SHIFT+Q)'
+        - 'активирует магическую форму, которая позволяет'
+        - 'применять забинженные ранее заклинания.'
+        - 'Кроме того, некоторые заклинания можно кастовать только'
+        - 'находясь в магической форме.'
+# Spells selection inventory
+inventory_of_spells:
+    # Title of the inventory
+    name: '§c§lВыбери заклинание'
+# The message that will be written to the player when he installed the spell
+# '%spell' will be replaced on spell name with spell color (configured below)
+on_player_installed_spell_message: '§6Установлена способность: %spell'
+# The message that will be written to the player when he use the spell
+# '%spell' will be replaced on spell name with spell color (configured below)
+on_player_use_spell_message: '%spell!'
+# The message that will be written to the player when spell reloading
+# '%reload' will be replaced on amount of time remaining (in seconds) before the ability is ready
+on_spell_reloading_message: '§6Способность перезаряжается ещё §a%reload сек.'
+# The message that will be written to the player when he tries to use an ability that can only be applied through LMB
+on_spell_left_click_only: '§cДанная способность применяется через ЛКМ'
+# The message that will be written to the player when he tries to use an ability that can only be applied through RMB
+on_spell_right_click_only: '§cДанная способность применяется через ПКМ'
+# The message that will be written to the player when the target of the spell was not found
+on_not_found_target_of_spell: '§5Не найдена цель заклинания.'
+# The message that will be written to the player when a spell was used on him
+# '%spell' will be replaced on spell name with spell color (configured below)
+on_spell_was_cast_on_player: '§lНа вас использовали %spell'
+# parameters of spells
+# Instruction:
+# spells:
+#   Identificator_of_spell:
+#       name: 'Display name of spell'
+#       item: 'Type of item that will be displayed in the spell selection menu'
+#       color: 'Spell color (more information below)'
+#       cooldown: Spell reload (in seconds). Must be an integer.
+#       verbal: 'Determines whether the player will write the name of the spell in the chat when casting it.'
+#       command: 'Team for quick ability applications. This option is available only for those 
+#                    abilities that can be applied using RBM'
+#       range: Max distance of caste spell on entity (in blocks)
+#       lore: 'Lore of spell in spells selection menu'
+#       duration: Duration of the spell effect (in seconds). Must be an integer.
+#       projectile_name: 'Name that will be displayed for the spell projectile'
+#       destroy_blocks: Can a spell to destroy the blocks (true or false).
+# Item types must be written as constants of the Material enumeration. The full list can be found here:
+# https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+# Colors should be written as the names of ChatColor enum constans from spigot. The full list can be found here:
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/ChatColor.html
+spells:
+    Morsmordre:
+        name: 'Морсмордре'
+        item: 'FIREWORK_ROCKET' 
+        color: 'GREEN'
+        cooldown: 10
+        verbal: true
+        lore: 
+            - 'Создаёт метку пожирателей смерти в небе'
+            - 'Может быть применено по направлению §7ЛКМ'
+    AlarteAscendare:
+        name: 'Аларте Аскендаре'
+        item: 'SLIME_BLOCK'
+        color: 'BLUE'
+        cooldown: 20
+        verbal: true
+        command: 'аа'
+        range: 30
+        lore:
+            - 'Подбрасывает цель в воздух.'
+            - 'Чем выше уровень чар, тем сильнее подбрасывание'
+            - 'Может быть применено на себя §7ПКМ'
+            - 'Или на другую сущность §7ЛКМ'
+    ArrestoMomentum:
+        name: 'Арресто моментум'
+        item: 'COBWEB'
+        color: 'AQUA'
+        cooldown: 8
+        verbal: true
+        command: 'ам'
+        range: 30
+        # The message that will be written to the player when he tries to move under the spell
+        # '%dur' will be replaced with the time remaining until the end of the effect of the spell
+        on_move: '§cВы не можете двигаться ещё §6%dur сек.'
+        # When player is caster
+        on_move_self: '§cВы не можете двигаться ещё §6%dur сек§c. Нажмите §7Присесть (SHIFT)§c, чтобы снять эффект заклинания.'
+        lore:
+            - 'Останавливает любое движение сущности'
+            - 'Длится 3/4/5 сек (в зависимости от уровня чар)'
+            - 'Может быть применено на себя §7ПКМ'
+            - 'Или на другую сущность §7ЛКМ'
+            - 'Эффект применения на себя может быть сброшен с'
+            - 'помощью §7Присесть (SHIFT)'
+            - 'На 3 уровне открывается новый способ использования:'
+            - '§7Присесть (SHIFT) + ЛКМ §5§o - заклинание применяется на'
+            - 'всех противников, находящихся неподалеку.'
+            - 'Требует манны: 2'
+            - 'На 3 уровне применение на себя не тратит манны.'
+    Alohomora:
+        name: 'Алохомора'
+        item: 'OAK_DOOR' 
+        color: 'LIGHT_PURPLE'
+        cooldown: 100
+        verbal: true
+        lore: 
+            - 'Со среднего расстояния открывает:'
+            - '   1 уровень - все виды дверей, люков, ворот и т.д.;'
+            - '   2 уровень - все виды хранилищ.'
+            - 'Работает в заприваченной территории,'
+            - 'на которую не наложена защита от магии.'
+            - '3 уровень - игнорирует защиту от магии'
+            - '(кроме админских регионов).'
+            - 'Максимальн'
+            - 'Требует манны:'
+            - '   нет привата - 1'
+            - '   есть приват - 15'
+            - '   стоит защита от магии - 25'
+            - 'Может быть применено по направлению §7ЛКМ'
+    Knockback:
+        name: 'Депульсо'
+        item: 'ENDER_PEARL'
+        color: 'DARK_AQUA'
+        cooldown: 10
+        verbal: true
+        command: 'де'
+        range: 15
+        lore: 
+            - 'Отталкивает существо в указанном направлении.'
+            - 'Чем выше уровень чар, тем сильнее откидывание'
+            - 'Применяется на другую сущность §7ЛКМ'
+            - 'Либо на себя §7ПКМ'
+            - 'На 3 уровне открывается новый способ использования:'
+            - '§7Присесть (SHIFT) + ЛКМ §5§o - заклинание применяется на'
+            - 'всех противников, находящихся неподалеку.'
+    AvadaKedavra:
+        name: 'Авада Кедавра'
+        item: 'WITHER_SKELETON_SKULL'
+        color: 'DARK_GREEN'
+        cooldown: 30
+        verbal: true
+        projectile_name: '§2§lАвада ебать'
+        destroy_blocks: false
+        # Damage of projectile. 1 unit = 0.5 hearts
+        damage: 10000
+        lore:
+            - 'Думаю не стоит говорить что это делает :\\'
+            - 'Применяется по направлению §7ЛКМ'
+            - '2 уровень позволяет автонаводиться на сущность.'
+            - 'Для этого следует использовать заклинание через §7ПКМ'
+    Protego:
+        name: 'Протего'
+        item: 'SHIELD'
+        color: 'BLUE'
+        cooldown: 5
+        verbal: true
+        duration: 2
+        range: 30
+        command: 'пр'
+        # A message that will be written to the player when that block the spell
+        # '%spell' will be replaced with the name of the blocked spell
+        block_message: '§lВы отразили %spell'
+        # '%dur' will be replaced with the duration of the spell
+        lore:
+            - 'Создаёт магический щит, защищающий'
+            - 'от большинства типов урона.'
+            - 'Блокирует большинство заклинаний.'
+            - 'Длится 1 сек.'
+            - '2 lvl - отражает заклинания'
+            - '   обрато в кастера.'
+            - '3 lvl - способен оторажать  Авада Кедавра.'
+            - '4 lvl - длится 2 сек.'
+            - 'Может быть применено на себя §7ПКМ'
+            - 'Или на другую сущность §7ЛКМ'
+    FlyingSpell:
+        name: 'Заклинание полета'
+        item: 'ELYTRA'
+        color: 'YELLOW'
+        cooldown: 60
+        verbal: true
+        duration: 20
+        # Fly speed
+        speed: 0.8
+        command: 'гп'
+        # How many times will the cooldown of the ability that will be used during the flight be reduced.
+        # Must be an integer.
+        reduce_cooldown: 2
+        # '%dur' will be replaced with the duration of the spell
+        # '%reduce' will be replaced on reduce cooldown
+        lore:
+            - 'Вы летите туда, куда смотрите.'
+            - 'Для остановки присядте (стандартно §7SHIFT§5§o).'
+            - 'Спринт (стандартно §7CTRL+W§5§o) увеличивает скорость.'
+            - 'Уровень заклинания влияет на скорость полета во'
+            - 'время спринта и его длительность.'
+            - 'Длительность: 15/20/25 сек.'
+            - 'Применяется на себя §7ПКМ'
+            - 'Манна тратиться в процессе полета.'
+            - 'На 3 уровне полет без спринта не требует манны.'
+            - 'Если мана закончится, то полет прикратится.'
+    Bombardo:
+        name: 'Бомбардо'
+        item: 'TNT'
+        color: 'DARK_RED'
+        cooldown: 35
+        verbal: true
+        # Name that will be displayed for the spell projectile
+        projectile_name: '§4§lБомбардо ебать'
+        # explosion radius on impact
+        yield: 7.5
+        destroy_blocks: false
+        # '%dmg' will be replaced with the damage of spell
+        lore:
+            - 'Кидает снаряд, который при попадании наносит'
+            - '10/15/20/40/40 единиц(у) урона.'
+            - 'Применяется по направлению §7ЛКМ'
+            - 'На 5 уровне доступен второй режим заклинания,'
+            - 'который кидает снаряд, при поподании вызывающий'
+            - 'огромный взрыв. Применяется по направлению §7ПКМ.'
+            - 'Все взрывы от заклинания могут также нанести урон'
+            - 'кастеру спелла.'
+    InvisibilitySpell:
+        name: 'Невидимость'
+        item: 'GLASS_PANE'
+        color: 'DARK_PURPLE'
+        cooldown: 30
+        verbal: false
+        duration: 5
+        command: 'не'
+        # '%dur' will be replaced with the duration of the spell
+        lore:
+            - 'Делает невидимым для мобов и игроков.'
+            - 'Части брони также становятся невидимыми.'
+            - 'Длительность: %dur сек.'
+            - 'Применяется невербально.'
+            - '2 уровень - копию-обманку при использовании'
+            - 'Применяется на себя §7ПКМ'
+    # Refers to spells that create magic fire
+    MagicFireSpell:
+        # Damage of fire. 1 unit = 0.5 hearts.
+        damage: 7.5
+        # The level of the slove effect that will be applied to the entity when it enters the fire. Must be integer.
+        slove_lvl: 3
+        # Duration of the slove effect in ticks (20 ticks = 1 second). Must be integer.
+        slove_dur: 25
+        # If true, the fire effects will work through the fire resistance effect.
+        ignore_fire_resistance: false
+    # Is magic fire spell
+    ProtegoDiabolica:
+        name: 'Протего Диаболика'
+        item: 'BLAZE_POWDER'
+        color: 'DARK_BLUE'
+        cooldown: 60
+        verbal: true
+        duration: 15
+        command: 'пд'
+        # Radius of the fire circle (in blocks)
+        radius: 7
+        # Thickness of the fire circle (in blocks)
+        thickness: 1.25
+        # Interval between clouds of fire particles (in blocks). The longer the interval, the fewer particles will spawn.
+        interval: 1.25
+        # '%dur' will be replaced with the duration of the spell
+        lore:
+            - 'Создаёт круг магического огня вокруг кастующего.'
+            - 'Любой, кто попытается войти в этот круг'
+            - 'будет получать урон'
+            - 'и сильный эффект замедления каждую секунду,'
+            - 'а также начнёт гореть.'
+            - 'Чем больше у игрока очков защиты, тем больше урона он получит.'
+            - 'На игрока, призвавшего заклинание никакого'
+            - 'негативного влияния огонь не оказывает.'
+            - 'Длительность: %dur сек.'
+            - 'При применении через §7ПКМ§5§o пламя будет игнорировать'
+            - 'всех игроков.'
+            - 'При применении через §7ЛКМ§5§o пламя будет дейстовать'
+            - 'на игроков (создателя по прежнему будет игнорировать).'
+    Konfringo:
+        name: 'Конфринго'
+        item: 'FLINT_AND_STEEL'
+        color: 'RED'
+        cooldown: 15
+        verbal: true
+        # Name that will be displayed for the spell projectile
+        projectile_name: '§4§lКонфринго'
+        # Damage that will be dealt to an entity if a projectile hits it. 1 unit = 0.5 hearts.
+        damage: 10
+        # Set fire to the radius (in blocks)
+        radius: 15
+        # How long will entities burn in ticks (20 ticks = 1 second)
+        fire_ticks: 1000
+        # The number of particles that occur when a projectile hits. A large number of particles can load the server.
+        particles: 1000
+        lore:
+            - 'Пускает снаряд, при попадании'
+            - 'вызывающий огненный взрыв, который поджигает'
+            - 'всех монстров и игроков в большом радиусе.'
+            - 'Второй уровень заклинания спавнит магический огонь на'
+            - 'места жертв Конфринго.'
+            - 'Цели, в которую попал снаряд, наносится 10 единиц урона.'
+            - 'Снаряд может быть отражён с помощью протего.'
+            - 'Применяется по направлению §7ЛКМ'
+            - 'Третий уровень заклинания позволяет'
+            - 'применять второй режим - Адское пламя §7ПКМ.'
+            - 'При его активации в месте, куда смотрит игрок,'
+            - 'спавнится магический огонь. Действует 15 сек.'
+            - 'Увеличить дальность спавна огня - §7ПКМ'
+            - 'Уменьшить дальность спавна огня - §7ЛКМ'
+            - 'Можно применять только находясь в магической форме §7(SHIFT+Q).' 
+    PartisTemporus:
+        name: 'Партис Темпорус'
+        item: 'BLAZE_POWDER'
+        color: 'DARK_RED'
+        cooldown: 60
+        verbal: true
+        duration: 15
+        command: 'пт'
+        # The length of the path of fire (in blocks)
+        length: 40
+        # The width of the path of the flames (in blocks)
+        width: 7
+        # Thickness of the fire line (in blocks)
+        thickness: 1.25
+        # Interval between clouds of fire particles (in blocks). The longer the interval, the fewer particles will spawn.
+        interval: 2.5
+        # '%dur' will be replaced with the duration of the spell
+        # '%dmg' will be replaced with the damage of the fire
+        lore:
+            - 'Создаёт путь, огороженный магическим огнём'
+            - 'Любой, кто попытается войти в этот путь'
+            - 'будет получать урон'
+            - 'и сильный эффект замедления каждую секунду,'
+            - 'а также начнёт гореть.'
+            - 'Чем больше у игрока очков защиты, тем больше урона он получит.'
+            - 'На игрока, призвавшего заклинание, никакого'
+            - 'негативного влияния огонь не оказывает.'
+            - 'Длительность: %dur сек.'
+            - 'При применении через §7ПКМ§5§o пламя будет игнорировать'
+            - 'всех игроков.'
+            - 'При применении через §7ЛКМ§5§o пламя будет дейстовать'
+            - 'на игроков (создателя по прежнему будет игнорировать).'
+# A string showing the command of the spell. Displayed at the end of the description of each spell who has a command
+# '%command' will be replaced with the command of the spell
+command_string: 'Быстрое применение: "§6%command§5".'
+# A string showing the cooldown of the spell. Displayed at the end of the description of each spell
+# '%reload' will be replaced with the cooldown of the spell
+reload_string: '§fПерезарядка: %reload сек.'
